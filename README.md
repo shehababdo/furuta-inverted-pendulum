@@ -185,8 +185,3 @@ Video test
 
 https://github.com/user-attachments/assets/b6d00658-7327-4849-9b36-fbe7a5270bcf
 
-
-
-https://github.com/user-attachments/assets/de400a2d-8e82-437b-bb21-9f0894c11f8a
-
-
