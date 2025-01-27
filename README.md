@@ -32,7 +32,8 @@ The physical system was built using:
 - **Microcontroller**: STM32 or Arduino for real-time control.
 - **Power Supply**: 12V battery or regulated power source.
 
-![WhatsApp Image 2025-01-01 at 16 21 51_386557d1](https://github.com/user-attachments/assets/b3099a07-df35-4c9f-8b9c-5675e4ad6c07)
+![image](https://github.com/user-attachments/assets/c73be008-2938-400e-8023-c496771d83a4)
+
 
 ---
 
@@ -65,6 +66,7 @@ The system dynamics were derived using Lagrangian mechanics. The state-space rep
 \[
 \mathbf{u} = V_{\text{motor}}
 \]
+![image](https://github.com/user-attachments/assets/de6ec75e-115f-4ffa-89e8-c8baf98ba3e1)
 
 ---
 
@@ -95,9 +97,12 @@ J = \int_0^\infty \left( \mathbf{x}^T Q \mathbf{x} + \mathbf{u}^T R \mathbf{u} \
 ## Implementation
  Hardware Setup
 - Motor driver: H-bridge for bidirectional control.
-- DC motor with magnetic Encoder![image](https://github.com/user-attachments/assets/676f0cb1-ce9f-4770-a1fa-a969909e4b04)
-- Optical incremental Encoder 600 ppr ![image](https://github.com/user-attachments/assets/ccf2d52c-9382-443d-9bf8-dbc7663af20a)
-- Microcontroller Selection (Arduino Mega 2560) ![image](https://github.com/user-attachments/assets/77fcdaa4-5642-4f02-a002-bdd30d667a83)
+- DC motor with magnetic Encoder
+  ![image](https://github.com/user-attachments/assets/676f0cb1-ce9f-4770-a1fa-a969909e4b04)
+- Optical incremental Encoder 600 ppr
+  ![image](https://github.com/user-attachments/assets/ccf2d52c-9382-443d-9bf8-dbc7663af20a)
+- Microcontroller Selection (Arduino Mega 2560)
+  ![image](https://github.com/user-attachments/assets/77fcdaa4-5642-4f02-a002-bdd30d667a83)
 
  ## Software  
 This section details the simulation workflow and hardware implementation.  
@@ -117,7 +122,8 @@ To model the DC motor dynamics, critical parameters (e.g., torque constant, back
      \]  
 3. **Validation**: Compared simulated vs. real motor responses.  
 
-![Parameter Estimation](images/param_estimation.png) *(Replace with motor step response plot)*  
+![image](https://github.com/user-attachments/assets/27f3c879-4ced-457c-9d08-d13eca1a5be0)
+
 
 ---
 
@@ -135,9 +141,17 @@ To model the DC motor dynamics, critical parameters (e.g., torque constant, back
    - Solved Riccati equation using `lqr(A, B, Q, R)` to compute gain matrix \( K \).  
 3. **Simulink Simulation**:  
    - Added LQR controller block to stabilize \( \theta \).  
-   - Tested disturbance rejection by applying impulse torque to the pendulum.  
+   - Tested disturbance rejection by applying impulse torque to the pendulum.
 
-![LQR Simulation](images/lqr_sim.png) *(Replace with stabilization plot)*  
+
+- LQR Parameters
+  ![image](https://github.com/user-attachments/assets/54b274b9-d21c-4584-b50c-b278fa967194)
+- State Feedback Controller Model
+  ![image](https://github.com/user-attachments/assets/49a59d0c-bc96-400b-b0cc-aaf270306ff7)
+- Simulation Output
+  ![image](https://github.com/user-attachments/assets/8ba0090d-93c3-4246-bf8a-89b9f21d1447)
+
+
 
 ---
 
@@ -154,7 +168,20 @@ To model the DC motor dynamics, critical parameters (e.g., torque constant, back
    - Compared HIL results with pure simulation.  
    - Adjusted \( Q \) and \( R \) to reduce real-world noise sensitivity.  
 
-![HIL Setup](images/hil_setup.jpg) *(Replace with HIL testing photo)*  
+ - HIL Model 
+  ![image](https://github.com/user-attachments/assets/0ee24add-55cc-4a7a-9570-fd4c126e1bf5)
+- Motor Encoder Model
+   ![image](https://github.com/user-attachments/assets/56b40524-9fe3-4fa8-8327-677a58fb6dc2)
+- Rotary Encoder Model
+  ![image](https://github.com/user-attachments/assets/9dfcb63c-d479-4f67-81f5-7464c9a9ae3a)
+- Controller
+  ![image](https://github.com/user-attachments/assets/9b24406a-0a51-408e-aed8-1f23d517311e)
+
 
 ---
 ## Testing And Results
+Video 1
+
+
+https://github.com/user-attachments/assets/9b1fbc0d-1985-4f5e-a351-9f2e0ccac13f
+
