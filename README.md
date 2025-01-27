@@ -13,7 +13,6 @@ This repository documents the design, modeling, and control of a Furuta Pendulum
 4. [Controller Design (LQR)](#controller-design-lqr)
 5. [Implementation](#implementation)
 6. [Testing and Results](#testing-and-results)
-7. [Conclusion](#conclusion)
 
 ---
 
@@ -180,8 +179,6 @@ To model the DC motor dynamics, critical parameters (e.g., torque constant, back
 
 ---
 ## Testing And Results
-Video 1
-
+Video test
 
 https://github.com/user-attachments/assets/9b1fbc0d-1985-4f5e-a351-9f2e0ccac13f
-
