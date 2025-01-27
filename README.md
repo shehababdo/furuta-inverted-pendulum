@@ -93,10 +93,68 @@ J = \int_0^\infty \left( \mathbf{x}^T Q \mathbf{x} + \mathbf{u}^T R \mathbf{u} \
 ---
 
 ## Implementation
-### Hardware Setup
+ Hardware Setup
 - Motor driver: H-bridge for bidirectional control.
-- Sensors: Encoder for \( \alpha \), IMU (MPU6050) for \( \theta \).
+- DC motor with magnetic Encoder![image](https://github.com/user-attachments/assets/676f0cb1-ce9f-4770-a1fa-a969909e4b04)
+- Optical incremental Encoder 600 ppr ![image](https://github.com/user-attachments/assets/ccf2d52c-9382-443d-9bf8-dbc7663af20a)
+- Microcontroller Selection (Arduino Mega 2560) ![image](https://github.com/user-attachments/assets/77fcdaa4-5642-4f02-a002-bdd30d667a83)
 
-### Software
-- **Simulation**: MATLAB/Simulink for LQR tuning.  
-- **Real-Time**: Simulink Hardware in the Loop
+ ## Software  
+This section details the simulation workflow and hardware implementation.  
+
+---
+
+### Step 1: Parameter Estimation  
+To model the DC motor dynamics, critical parameters (e.g., torque constant, back-EMF, inertia) were estimated experimentally:  
+1. **Data Collection**:  
+   - Applied step voltages to the motor and measured angular velocity using an encoder.  
+   - Recorded input-output data for system identification.  
+2. **MATLAB System Identification Toolbox**:  
+   - Used `tfest` to fit a transfer function to the experimental data.  
+   - Estimated motor model:  
+     \[
+     G(s) = \frac{\omega(s)}{V(s)} = \frac{K}{\tau s + 1}
+     \]  
+3. **Validation**: Compared simulated vs. real motor responses.  
+
+![Parameter Estimation](images/param_estimation.png) *(Replace with motor step response plot)*  
+
+---
+
+### Step 2: LQR Control Design  
+1. **State-Space Linearization**:  
+   - Derived linearized model at equilibrium:  
+     \[
+     \dot{\mathbf{x}} = A\mathbf{x} + B\mathbf{u}, \quad \mathbf{x} = [\alpha, \theta, \dot{\alpha}, \dot{\theta}]^T
+     \]  
+2. **LQR Tuning in MATLAB**:  
+   - Weighting matrices:  
+     \[
+     Q = \text{diag}([1, 100, 0.1, 10]), \quad R = 0.1
+     \]  
+   - Solved Riccati equation using `lqr(A, B, Q, R)` to compute gain matrix \( K \).  
+3. **Simulink Simulation**:  
+   - Added LQR controller block to stabilize \( \theta \).  
+   - Tested disturbance rejection by applying impulse torque to the pendulum.  
+
+![LQR Simulation](images/lqr_sim.png) *(Replace with stabilization plot)*  
+
+---
+
+### Step 3: Hardware-in-the-Loop (HIL) Testing  
+1. **Simulink Real-Time Integration**:  
+   - Generated C code from Simulink using `Simulink Coder`.  
+   - Deployed the LQR controller to an STM32/Arduino via USB/UART.  
+2. **HIL Workflow**:  
+   - Connected Simulink to hardware:  
+     - **Inputs**: Encoder (α), IMU (θ).  
+     - **Output**: PWM signal to motor driver.  
+   - Validated real-time performance with simulated disturbances.  
+3. **Validation**:  
+   - Compared HIL results with pure simulation.  
+   - Adjusted \( Q \) and \( R \) to reduce real-world noise sensitivity.  
+
+![HIL Setup](images/hil_setup.jpg) *(Replace with HIL testing photo)*  
+
+---
+## Testing And Results
