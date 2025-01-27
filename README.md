@@ -181,4 +181,12 @@ To model the DC motor dynamics, critical parameters (e.g., torque constant, back
 ## Testing And Results
 Video test
 
-https://github.com/user-attachments/assets/9b1fbc0d-1985-4f5e-a351-9f2e0ccac13f
+
+
+https://github.com/user-attachments/assets/b6d00658-7327-4849-9b36-fbe7a5270bcf
+
+
+
+https://github.com/user-attachments/assets/de400a2d-8e82-437b-bb21-9f0894c11f8a
+
+
