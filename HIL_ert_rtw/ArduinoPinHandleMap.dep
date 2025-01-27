@@ -1,0 +1,5 @@
+ArduinoPinHandleMap.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2023a/toolbox/target/supportpackages/arduinobase/src/ArduinoPinHandleMap.cpp \
+ D:/ASU/Hybird_Control/pandoll/HIL_ert_rtw/rtwtypes.h
+
+D:/ASU/Hybird_Control/pandoll/HIL_ert_rtw/rtwtypes.h:
